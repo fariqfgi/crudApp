@@ -2,3 +2,5 @@
 
 ## Kelas 5C
 Fariq Fadillah Gusti Insani - 18090094
+
+Sofanji - 18090098
