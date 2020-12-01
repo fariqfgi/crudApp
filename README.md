@@ -4,3 +4,5 @@
 Fariq Fadillah Gusti Insani - 18090094
 
 Sofanji - 18090098
+
+- Database using room
