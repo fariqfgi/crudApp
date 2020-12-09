@@ -5,11 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = arrayOf(Helm::class), version = 1)
+@Database(entities = arrayOf(Helm::class, User::class), version = 1)
 
 abstract class AppRoomDB : RoomDatabase() {
 
     abstract fun helmDao(): HelmDao
+    abstract fun userDao(): UserDao
 
     companion object {
 
