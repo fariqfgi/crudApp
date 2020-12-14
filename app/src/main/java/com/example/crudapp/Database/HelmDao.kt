@@ -15,4 +15,8 @@ interface HelmDao {
 
     @Query("SELECT * FROM helm")
     suspend fun getAllHelm(): List<Helm>
+
+    @Query("SELECT * FROM helm WHERE id=:helm_id")
+    suspend fun getHelm(helm_id: Int) : List<Helm>
+
 }
