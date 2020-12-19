@@ -36,6 +36,7 @@ class EditHelmActivity : AppCompatActivity() {
     }
 
     fun setupView() {
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         val intentType = intent.getIntExtra("intent_type", 0)
         when (intentType) {
             Constant.TYPE_CREATE -> {
@@ -56,5 +57,10 @@ class EditHelmActivity : AppCompatActivity() {
             txt_stok.setText( helms.stok.toString() )
             txt_harga.setText( helms.harga.toString() )
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
     }
 }

@@ -1,10 +1,12 @@
 package com.example.crudapp
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.crudapp.Database.AppRoomDB
 import com.example.crudapp.Database.Constant
@@ -29,6 +31,10 @@ class HelmActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        loadHelm()
+    }
+
+    fun loadHelm(){
         CoroutineScope(Dispatchers.IO).launch {
             val allHelm = db.helmDao().getAllHelm()
             Log.d("HelmActivity", "dbResponse: $allHelm")
@@ -50,6 +56,10 @@ class HelmActivity : AppCompatActivity() {
                 intentEdit(helm.id, Constant.TYPE_READ)
             }
 
+            override fun onDelete(helm: Helm) {
+                deleteDialog(helm)
+            }
+
         })
         list_helm.apply {
             layoutManager = LinearLayoutManager(applicationContext)
@@ -63,5 +73,24 @@ class HelmActivity : AppCompatActivity() {
                 .putExtra("intent_id", helmId)
                 .putExtra("intent_type", intentType)
         )
+    }
+
+    private fun deleteDialog(helm: Helm) {
+        val alertDialog = AlertDialog.Builder(this)
+        alertDialog.apply {
+            setTitle("Konfirmasi")
+            setMessage("Yakin ingin menghapus data ini?")
+            setNegativeButton("Batal") { dialogInterface, i ->
+                dialogInterface.dismiss()
+            }
+            setPositiveButton("Hapus") { dialogInterface, i ->
+                dialogInterface.dismiss()
+                CoroutineScope(Dispatchers.IO).launch {
+                    db.helmDao().deleteHelm(helm)
+                    loadHelm()
+                }
+            }
+        }
+        alertDialog.show()
     }
 }
