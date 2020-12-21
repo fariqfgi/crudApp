@@ -5,7 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crudapp.Database.User
+import kotlinx.android.synthetic.main.adapter_helm.view.*
 import kotlinx.android.synthetic.main.adapter_user.view.*
+import kotlinx.android.synthetic.main.adapter_user.view.icon_delete
 
 class UserAdapter (private val AllUser: ArrayList<User>, private val listener: OnAdapterListener) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
@@ -23,6 +25,9 @@ class UserAdapter (private val AllUser: ArrayList<User>, private val listener: O
         holder.view.text_username.setOnClickListener {
             listener.onClick(user)
         }
+        holder.view.icon_delete.setOnClickListener {
+            listener.onDelete(user)
+        }
     }
 
     class UserViewHolder(val view: View) : RecyclerView.ViewHolder(view)
@@ -35,6 +40,7 @@ class UserAdapter (private val AllUser: ArrayList<User>, private val listener: O
 
     interface OnAdapterListener {
         fun onClick(user: User)
+        fun onDelete(user: User)
     }
 
 }
