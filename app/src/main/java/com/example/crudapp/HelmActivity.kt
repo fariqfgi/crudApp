@@ -53,11 +53,18 @@ class HelmActivity : AppCompatActivity() {
     fun setupRecyclerView() {
         helmAdapter = HelmAdapter(arrayListOf(), object: HelmAdapter.OnAdapterListener {
             override fun onClick(helm: Helm) {
+                // read detail
                 intentEdit(helm.id, Constant.TYPE_READ)
             }
 
             override fun onDelete(helm: Helm) {
+                // delete data
                 deleteDialog(helm)
+            }
+
+            override fun onUpdate(helm: Helm) {
+                // edit data
+                intentEdit(helm.id, Constant.TYPE_UPDATE)
             }
 
         })

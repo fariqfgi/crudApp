@@ -26,6 +26,9 @@ class HelmAdapter (private val AllHelm: ArrayList<Helm>, private val listener: O
         holder.view.icon_delete.setOnClickListener {
             listener.onDelete(helm)
         }
+        holder.view.icon_edit.setOnClickListener {
+            listener.onUpdate(helm)
+        }
     }
 
     class HelmViewHolder(val view: View) : RecyclerView.ViewHolder(view)
@@ -39,5 +42,6 @@ class HelmAdapter (private val AllHelm: ArrayList<Helm>, private val listener: O
     interface OnAdapterListener {
         fun onClick(helm: Helm)
         fun onDelete(helm: Helm)
+        fun onUpdate(helm: Helm)
     }
 }

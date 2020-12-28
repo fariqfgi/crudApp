@@ -33,6 +33,14 @@ class EditHelmActivity : AppCompatActivity() {
                 finish()
             }
         }
+        btn_updateHelm.setOnClickListener{
+            CoroutineScope(Dispatchers.IO).launch {
+                db.helmDao().updateHelm(
+                    Helm(helmId, txt_merk.text.toString(), Integer.parseInt(txt_stok.text.toString()), Integer.parseInt(txt_harga.text.toString()) )
+                )
+                finish()
+            }
+        }
     }
 
     fun setupView() {
@@ -40,9 +48,14 @@ class EditHelmActivity : AppCompatActivity() {
         val intentType = intent.getIntExtra("intent_type", 0)
         when (intentType) {
             Constant.TYPE_CREATE -> {
-
+                btn_updateHelm.visibility = View.GONE
             }
             Constant.TYPE_READ -> {
+                btn_saveHelm.visibility = View.GONE
+                btn_updateHelm.visibility = View.GONE
+                getHelm()
+            }
+            Constant.TYPE_UPDATE -> {
                 btn_saveHelm.visibility = View.GONE
                 getHelm()
             }
